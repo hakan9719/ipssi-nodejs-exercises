@@ -1,0 +1,24 @@
+<%- include('../partials/head') %>
+
+<%- include('../partials/nav') %>
+
+<h1>Ajouter une voiture</h1>
+
+<form>
+  <label for="brand">marque :</label>
+  <input type="text" id="brand">
+
+  <label for="model">Modèle :</label>
+  <input type="text" id="model">
+
+  <label for="year">année :</label>
+  <input type="text" id="year">
+
+  <label for="type">type :</label>
+  <input type="text" id="type">
+
+  <label for="price">prix :</label>
+  <input type="text" id="price">
+
+  <button type="submit" onclick="createCar()">Créer</button>
+</form>

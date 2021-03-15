@@ -1,0 +1,16 @@
+<%- include('partials/head') %>
+
+<%- include('header') %>
+
+<h1>Animals</h1>
+
+<ul>
+  <% animals.forEach((animal) => { %>
+    <li>
+      <a href="http://localhost:4000/animal/<%= animal._id %>">
+        <%= animal.nom %>
+      </a>
+      <button type="button" onclick="deleteAnimal('<%= animal._id %>')">Supprimer</button>
+    </li>
+  <% }) %>
+</ul>

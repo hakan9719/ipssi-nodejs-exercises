@@ -1,0 +1,30 @@
+<%- include('../partials/head') %>
+
+<%- include('../partials/nav') %>
+
+<h1>Cars</h1>
+
+<table>
+  <thead>
+    <tr>
+        <th colspan="2">Voitures dispo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cars.forEach((car) => { %>
+      <tr>
+          <td><%= car._id %></td>
+          <td><%= car.brand %></td>
+          <td><%= car.model %></td>
+          <td><%= car.year %></td>
+          <td>
+            <a href="http://localhost:4000/car/<%= car._id%>">Voir le detail</a>
+          </td>
+          <td>
+            <a href="http://localhost:4000/update/car/<%= car._id%>">Mettre à jour</a>
+          </td>
+          <td><button type="button" onclick="deleteCar('<%= car._id %>')">Supprimer</button></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

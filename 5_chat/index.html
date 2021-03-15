@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>Hello</h1>
+    <div>
+      <ul id="chatMessages"></ul>
+    </div>
+    <form id="form">
+      <input type="text" name="textBox" id="textBox" />
+      <button type="submit" id="sendMessage">Envoyer</button>
+    </form>
+    <h2>Connected users</h2>
+    <ul id="users"></ul>
+  </body>
+  <script>
+    const socket = io();
+
+    const form = document.getElementById("form");
+    const textBox = document.getElementById("textBox");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (textBox.value !== "") {
+        socket.emit("message", textBox.value);
+
+        textBox.value = "";
+      }
+    });
+
+    socket.on("user connected", (users) => {
+      const userList = document.getElementById("users");
+
+      users.forEach((user) => {
+        const userId = user.id;
+
+        if (!document.getElementById(userId)) {
+          const newUser = document.createElement("li");
+
+          newUser.textContent = user.username;
+          newUser.id = userId;
+
+          userList.appendChild(newUser);
+        }
+      });
+    });
+
+    socket.on("history", (history) => {
+      if (document.getElementById("chatMessages").innerHTML === "") {
+        history.forEach((message) => {
+          const newLi = document.createElement("li");
+          newLi.textContent = message;
+
+          chat.appendChild(newLi);
+        });
+      }
+    });
+
+    socket.on("user disconnected", (userId) => {
+      document.getElementById(userId).remove();
+    });
+
+    socket.on("message", (message) => {
+      console.log(message);
+      const chat = document.getElementById("chatMessages");
+
+      const newLi = document.createElement("li");
+      newLi.textContent = message;
+
+      chat.appendChild(newLi);
+    });
+  </script>
+</html>

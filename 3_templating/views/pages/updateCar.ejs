@@ -1,0 +1,24 @@
+<%- include('../partials/head') %>
+
+<%- include('../partials/nav') %>
+
+<h1>Ajouter une voiture</h1>
+
+<form>
+  <label for="brand">marque :</label>
+  <input type="text" id="brand" value="<%= car.brand %>">
+
+  <label for="model">Modèle :</label>
+  <input type="text" id="model" value="<%= car.model %>">
+
+  <label for="year">année :</label>
+  <input type="text" id="year" value="<%= car.year %>">
+
+  <label for="type">type :</label>
+  <input type="text" id="type" value="<%= car.type %>">
+
+  <label for="price">prix :</label>
+  <input type="text" id="price" value="<%= car.price %>">
+
+  <button type="submit" onclick="updateCar('<%= car._id %>')">Mettre à jour</button>
+</form>
